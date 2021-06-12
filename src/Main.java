@@ -1,5 +1,5 @@
-//Guarda este archivo con el nombre Main.java
-//package ....libros;
+import dtos.Libro;
+import interfaces.Funcion;
 
 import java.io.*;
 import java.util.*;
@@ -53,11 +53,12 @@ public class Main {
                 archivo.print(libro.getAnno_de_publicacion() + "\n");
             }
         };
-        if(!System.getProperties().get("os.name").equals("Linux") && System.console()!=null)
+        if (!System.getProperties().get("os.name").equals("Linux") && System.console() != null)
             try {
                 out = new PrintStream(System.out, true, "CP850");
                 teclado = new Scanner(System.in, "CP850");
-            } catch (UnsupportedEncodingException e) {}
+            } catch (UnsupportedEncodingException e) {
+            }
         Vector<Libro> vector = new Vector<Libro>();
         int i, n;
         Libro dato = null, libro;
@@ -78,7 +79,8 @@ public class Main {
                 vector.add(libro);
             }
             entrada.close();
-        } catch (FileNotFoundException e) {}
+        } catch (FileNotFoundException e) {
+        }
         libro = new Libro();
         do {
             out.println("MEN\u00DA");
@@ -90,35 +92,35 @@ public class Main {
             out.println("6.- Listar registros");
             out.println("7.- Salir");
             do {
-                opcion = leer_entero ("Seleccione una opci\u00F3n");
-                if(opcion<1 || opcion>7)
+                opcion = leer_entero("Seleccione una opci\u00F3n");
+                if (opcion < 1 || opcion > 7)
                     out.println("Opci\u00F3nn no v\u00E1lida.");
-            } while (opcion<1 || opcion>7);
+            } while (opcion < 1 || opcion > 7);
             out.println();
-            if (vector.isEmpty() && opcion!=1 && opcion!=7) {
+            if (vector.isEmpty() && opcion != 1 && opcion != 7) {
                 pausar("No hay registros.\n");
                 continue;
             }
-            if (opcion<5) {
-                libro.setISBN(leer_cadena ("Ingrese el ISBN del libro"));
+            if (opcion < 5) {
+                libro.setISBN(leer_cadena("Ingrese el ISBN del libro"));
                 i = vector.indexOf(libro);
-                dato = i<0 ? null : vector.get(i);
-                if (dato!=null) {
+                dato = i < 0 ? null : vector.get(i);
+                if (dato != null) {
                     out.println();
                     imprimir.funcion(dato, contador);
                 }
             }
-            if (opcion==1 && dato!=null)
+            if (opcion == 1 && dato != null)
                 out.println("El registro ya existe.");
-            else if (opcion>=2 && opcion<=4 && dato==null)
+            else if (opcion >= 2 && opcion <= 4 && dato == null)
                 out.println("\nRegistro no encontrado.");
             else switch (opcion) {
                     case 1:
-                        libro.setTitulo(leer_cadena ("Ingrese el titulo"));
-                        libro.setAutor(leer_cadena ("Ingrese el autor"));
-                        libro.setEditorial(leer_cadena ("Ingrese el editorial"));
-                        libro.setEdicion(leer_entero ("Ingrese el edicion"));
-                        libro.setAnno_de_publicacion(leer_entero ("Ingrese el anno de publicacion"));
+                        libro.setTitulo(leer_cadena("Ingrese el titulo"));
+                        libro.setAutor(leer_cadena("Ingrese el autor"));
+                        libro.setEditorial(leer_cadena("Ingrese el editorial"));
+                        libro.setEdicion(leer_entero("Ingrese el edicion"));
+                        libro.setAnno_de_publicacion(leer_entero("Ingrese el anno de publicacion"));
                         vector.add(libro);
                         libro = new Libro();
                         out.println("\nRegistro agregado correctamente.");
@@ -131,25 +133,25 @@ public class Main {
                         out.println("4.- edicion");
                         out.println("5.- anno de publicacion");
                         do {
-                            subopcion = leer_entero ("Seleccione un n\u00FAmero de campo a modificar");
-                            if (subopcion<1 || subopcion>5)
+                            subopcion = leer_entero("Seleccione un n\u00FAmero de campo a modificar");
+                            if (subopcion < 1 || subopcion > 5)
                                 out.println("Opci\u00F3n no v\u00E1lida.");
-                        } while (subopcion<1 || subopcion>5);
+                        } while (subopcion < 1 || subopcion > 5);
                         switch (subopcion) {
                             case 1:
-                                dato.setTitulo(leer_cadena ("Ingrese el nuevo titulo"));
+                                dato.setTitulo(leer_cadena("Ingrese el nuevo titulo"));
                                 break;
                             case 2:
-                                dato.setAutor(leer_cadena ("Ingrese el nuevo autor"));
+                                dato.setAutor(leer_cadena("Ingrese el nuevo autor"));
                                 break;
                             case 3:
-                                dato.setEditorial(leer_cadena ("Ingrese el nuevo editorial"));
+                                dato.setEditorial(leer_cadena("Ingrese el nuevo editorial"));
                                 break;
                             case 4:
-                                dato.setEdicion(leer_entero ("Ingrese el nuevo edicion"));
+                                dato.setEdicion(leer_entero("Ingrese el nuevo edicion"));
                                 break;
                             case 5:
-                                dato.setAnno_de_publicacion(leer_entero ("Ingrese el nuevo anno de publicacion"));
+                                dato.setAnno_de_publicacion(leer_entero("Ingrese el nuevo anno de publicacion"));
                                 break;
                         }
                         out.println("\nRegistro actualizado correctamente.");
@@ -165,103 +167,21 @@ public class Main {
                     case 6:
                         n = vector.size();
                         contador[0] = 0;
-                        for (i=0; i<n; i++)
+                        for (i = 0; i < n; i++)
                             imprimir.funcion(vector.get(i), contador);
                         out.println("Total de registros: " + contador[0] + ".");
                         break;
                 }
-            if (opcion<7 && opcion>=1)
+            if (opcion < 7 && opcion >= 1)
                 pausar("");
-        } while (opcion!=7);
+        } while (opcion != 7);
         try {
             PrintStream salida = new PrintStream(ruta);
             n = vector.size();
-            for (i=0; i<n; i++)
+            for (i = 0; i < n; i++)
                 imprimirEnArchivo.funcion(vector.get(i), salida);
             salida.close();
-        } catch (FileNotFoundException e) {}
-    }
-}
-
-interface Funcion<T extends Comparable<T>> {
-    void funcion(T dato, Object parametros);
-}
-
-class Libro implements Comparable<Libro> {
-
-    private String ISBN;
-    private String titulo;
-    private String autor;
-    private String editorial;
-    private int edicion;
-    private int anno_de_publicacion;
-
-    @Override
-    public boolean equals(Object libro) {
-        return this==libro || (libro instanceof Libro && ISBN.equals(((Libro)libro).ISBN));
-    }
-
-    @Override
-    public int compareTo(Libro libro) {
-        return ISBN.compareTo(libro.ISBN);
-    }
-
-    @Override
-    public String toString() {
-        return
-                "ISBN               : " + ISBN + "\n" +
-                        "titulo             : " + titulo + "\n" +
-                        "autor              : " + autor + "\n" +
-                        "editorial          : " + editorial + "\n" +
-                        "edicion            : " + edicion + "\n" +
-                        "anno de publicacion: " + anno_de_publicacion + "\n";
-    }
-
-    public String getISBN() {
-        return ISBN;
-    }
-
-    public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getAutor() {
-        return autor;
-    }
-
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
-
-    public String getEditorial() {
-        return editorial;
-    }
-
-    public void setEditorial(String editorial) {
-        this.editorial = editorial;
-    }
-
-    public int getEdicion() {
-        return edicion;
-    }
-
-    public void setEdicion(int edicion) {
-        this.edicion = edicion;
-    }
-
-    public int getAnno_de_publicacion() {
-        return anno_de_publicacion;
-    }
-
-    public void setAnno_de_publicacion(int anno_de_publicacion) {
-        this.anno_de_publicacion = anno_de_publicacion;
+        } catch (FileNotFoundException e) {
+        }
     }
 }
