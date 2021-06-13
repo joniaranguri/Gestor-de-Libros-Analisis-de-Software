@@ -1,10 +1,11 @@
 import dtos.Libro;
 import dtos.Usuario;
-import helpers.RSAAsymetricCrypto;
+import helpers.Encryptor;
 import interfaces.Funcion;
 
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.*;
 
 import BL.UsuarioLogger;
@@ -36,10 +37,8 @@ public class Main {
 
     public static String ruta = "libros.tsv";
 
-    public static void main(String[] args) {
-    	
+	public static void main(String[] args) {
 
-    	
         Funcion<Libro> imprimir = new Funcion<Libro>() {
             @Override
             public void funcion(Libro libro, Object parametros) {
@@ -190,5 +189,5 @@ public class Main {
             salida.close();
         } catch (FileNotFoundException e) {
         }
-    }
+	}
 }

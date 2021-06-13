@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
 import dtos.Usuario;
-import helpers.RSAAsymetricCrypto;
+import helpers.Encryptor;
 
 public class UsuarioLogger {
 
@@ -37,7 +37,9 @@ public class UsuarioLogger {
 
 			file = new FileWriter(FILE_PATH, true);
 			pw = new PrintWriter(file);
-			pw.println(usuario.getUsername() + "|" + usuario.getPassword());
+//			String aux2 = encryptor.Encrypt(usuario.getPassword());
+			pw.println(
+					usuario.getUsername() + "|" + Encryptor.encrypt(usuario.getPassword(), Encryptor.getSecretKey()));
 
 			return 0;
 		} catch (Exception ex) {
@@ -45,7 +47,7 @@ public class UsuarioLogger {
 			return 1;
 		} finally {
 			try {
-				//Cerramos todos los archivos
+				// Cerramos todos los archivos
 				if (reader != null)
 					reader.close();
 				if (null != file)
@@ -56,7 +58,7 @@ public class UsuarioLogger {
 		}
 	}
 
-	public static int Login(Usuario usuario, RSAAsymetricCrypto encryptor) throws NoSuchAlgorithmException {
+	public static int Login(Usuario usuario) throws NoSuchAlgorithmException {
 		String linea;
 		String[] aux;
 		try {
@@ -65,8 +67,8 @@ public class UsuarioLogger {
 				linea = input.nextLine();
 				// Cada linea se guardara con el formato USERNAME|PASSWORD
 				aux = linea.split("\\|");
-				if (aux[0].compareTo(usuario.getUsername()) == 0 && aux[1].compareTo(usuario.getPassword()) == 0) {
-					// && encryptor.Decrypt(aux[1]).compareTo(usuario.getPassword()) == 0) {
+				if (aux[0].compareTo(usuario.getUsername()) == 0
+						&& Encryptor.decrypt(aux[1], Encryptor.getSecretKey()).compareTo(usuario.getPassword()) == 0) {
 					input.close();
 					return 0;
 				}
