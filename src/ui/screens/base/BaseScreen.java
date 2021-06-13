@@ -8,5 +8,10 @@ public abstract class BaseScreen extends JPanel {
         add(new JLabel(getTitle()));
     }
 
+    public void showMessage(final String message) {
+        JOptionPane.showMessageDialog(this, message);
+
+    }
+
     public abstract String getTitle();
 }

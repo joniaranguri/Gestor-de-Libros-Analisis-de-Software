@@ -20,35 +20,35 @@ public class ScreenManager {
     }
 
     private void goToScreenInstance(final ScreenName screenName) {
-        BaseScreen screenToNavigate = null;
+        BaseScreen screenToNavigate;
         switch (screenName) {
             case ALTAS:
-                screenToNavigate = new Altas();
+                screenToNavigate = Altas.getInstance();
                 break;
             case BAJAS:
-                screenToNavigate = new Bajas();
+                screenToNavigate = Bajas.getInstance();
                 break;
             case CONSULTAS:
-                screenToNavigate = new Consultas();
+                screenToNavigate = Consultas.getInstance();
 
                 break;
             case LISTAR_REGISTROS:
-                screenToNavigate = new ListarRegistros();
+                screenToNavigate = ListarRegistros.getInstance();
 
                 break;
             case ORDENAR_REGISTROS:
-                screenToNavigate = new OrdenarRegistros();
+                screenToNavigate = OrdenarRegistros.getInstance();
 
                 break;
             case ACTUALIZACIONES:
-                screenToNavigate = new Actualizaciones();
+                screenToNavigate = Actualizaciones.getInstance();
 
                 break;
             default:
-                screenToNavigate = new Login();
+                screenToNavigate = Login.getInstance();
         }
         contentPane.removeAll();
-        contentPane.revalidate();
+        contentPane.repaint();
         contentPane.add(screenToNavigate, BorderLayout.CENTER);
         contentPane.revalidate();
 
