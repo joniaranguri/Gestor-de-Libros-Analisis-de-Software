@@ -2,6 +2,7 @@ import dtos.Libro;
 import dtos.Usuario;
 import helpers.Encryptor;
 import interfaces.Funcion;
+import ui.InterfazPrincipal;
 
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
@@ -38,6 +39,9 @@ public class Main {
     public static String ruta = "libros.tsv";
 
 	public static void main(String[] args) {
+
+        final InterfazPrincipal interfazPrincipal = new InterfazPrincipal();
+        interfazPrincipal.setVisible(true);
 
         Funcion<Libro> imprimir = new Funcion<Libro>() {
             @Override

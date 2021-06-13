@@ -1,0 +1,5 @@
+package constants;
+
+public enum ScreenName {
+    LOGIN, ACTUALIZACIONES, ALTAS, BAJAS, CONSULTAS, LISTAR_REGISTROS, ORDENAR_REGISTROS
+}
