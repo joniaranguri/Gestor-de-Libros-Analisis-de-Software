@@ -10,6 +10,9 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import static constants.Dimens.WINDOW_HEIGHT;
+import static constants.Dimens.WINDOW_WIDTH;
+
 public class InterfazPrincipal extends JFrame {
 
     private static final String GESTOR_DE_LIBROS_TITLE = "Gestor de Libros";
@@ -32,6 +35,7 @@ public class InterfazPrincipal extends JFrame {
         setupMainPane();
         addViewsToContentPane();
         this.screenManager = new ScreenManager(mainPanel);
+        screenManager.goToScreen(ScreenName.LOGIN);
     }
 
     private void addViewsToContentPane() {
@@ -47,7 +51,7 @@ public class InterfazPrincipal extends JFrame {
 
     private void setupMenuPane() {
         menuPanel.setBackground(new Color(227, 232, 229));
-        menuPanel.setBounds(0, 0, 500, 500);
+        menuPanel.setBounds(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
         menuPanel.setLayout(new GridLayout(8, 1));
         setupButtonActions();
         addSubviewsToMenuPane();
@@ -105,7 +109,7 @@ public class InterfazPrincipal extends JFrame {
     private void setupWindow() {
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 800, 500);
+        setBounds(100, 100, WINDOW_WIDTH, WINDOW_HEIGHT);
         setTitle(GESTOR_DE_LIBROS_TITLE);
         setLocationRelativeTo(null);
     }
