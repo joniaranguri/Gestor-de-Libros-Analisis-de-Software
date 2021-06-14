@@ -1,37 +1,38 @@
 package dtos;
 
-public class Usuario  implements Comparable<Usuario>{
-	  	private String Username;
-	    private String Password;
+public class Usuario implements Comparable<Usuario> {
+    private String username;
+    private String password;
 
-	    
-	    public Usuario(String username,String password) {
-	    	this.Username = username;
-	    	this.Password = password;
-	    }
-	    @Override
-	    public boolean equals(Object usuario) {
-	        return this == usuario || (usuario instanceof Usuario && Username.equals(((Usuario) usuario).Username));
-	    }
 
-	    @Override
-	    public int compareTo(Usuario usuario) {
-	        return Username.compareTo(usuario.Username);
-	    }
+    public Usuario(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
-	    @Override
-	    public String toString() {
-	        return
-	                "Usuario               : " + Username;
-	    }
+    @Override
+    public boolean equals(Object usuario) {
+        return this == usuario || (usuario instanceof Usuario && username.equals(((Usuario) usuario).username));
+    }
 
-	    
-	    public String getUsername() {
-	        return this.Username;
-	    }
-	    
-	    public String getPassword() {
-	        return this.Password;
-	    }
+    @Override
+    public int compareTo(Usuario usuario) {
+        return username.compareTo(usuario.username);
+    }
+
+    @Override
+    public String toString() {
+        return
+                "Usuario               : " + username;
+    }
+
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
 
 }
