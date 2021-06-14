@@ -1,5 +1,6 @@
 package BL;
 
+import com.sun.deploy.util.SystemUtils;
 import dtos.Usuario;
 import helpers.Encryptor;
 
@@ -14,7 +15,13 @@ public class UsuarioLogger {
     public enum RegisterStatus {
         SUCCESS,ERROR,DUPLICATED,INVALID
     }
-    public static String FILE_PATH = "./files/users.txt";
+
+    public static String FILE_PATH = getFilePath();
+
+    private static String getFilePath() {
+        final String OS = System.getProperty("os.name");
+        return (OS != null && OS.startsWith("Windows") ? ".." : ".") + "/files/users.txt";
+    }
 
     public static RegisterStatus registrar(final Usuario usuario) {
 
