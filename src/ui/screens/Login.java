@@ -1,5 +1,6 @@
 package ui.screens;
 
+import BL.UsuarioLogger;
 import controllers.AuthenticationManager;
 import ui.screens.base.BaseScreen;
 
@@ -14,16 +15,16 @@ public class Login extends BaseScreen implements ActionListener {
     private static BaseScreen INSTANCE;
     private static final String LOGIN_TITLE = "Bienvenido al Gestor de Libros \n" +
             "Inicie sesión para continuar";
-    JLabel userLabel=new JLabel("Usuario");
-    JLabel passwordLabel=new JLabel("Contraseña");
-    JTextField userTextField=new JTextField();
-    JPasswordField passwordField=new JPasswordField();
-    JButton loginButton=new JButton("Acceder");
-    JCheckBox showPassword=new JCheckBox("Mostrar Contraseña");
+    JLabel userLabel = new JLabel("Usuario");
+    JLabel passwordLabel = new JLabel("Contraseña");
+    JTextField userTextField = new JTextField();
+    JPasswordField passwordField = new JPasswordField();
+    JButton loginButton = new JButton("Acceder");
+    JButton registerButton = new JButton("Registrarse");
+    JCheckBox showPassword = new JCheckBox("Mostrar Contraseña");
 
 
-
-    private Login(){
+    private Login() {
         setLayout(null);
         setLocationAndSize();
         addComponentsToContainer();
@@ -33,7 +34,9 @@ public class Login extends BaseScreen implements ActionListener {
     public void addActionEvent() {
         loginButton.addActionListener(this);
         showPassword.addActionListener(this);
+        registerButton.addActionListener(this);
     }
+
     public void addComponentsToContainer() {
         add(titleView);
         add(userLabel);
@@ -42,20 +45,21 @@ public class Login extends BaseScreen implements ActionListener {
         add(passwordField);
         add(showPassword);
         add(loginButton);
+        add(registerButton);
     }
 
-    public void setLocationAndSize(){
+    public void setLocationAndSize() {
         //Setting location and Size of each components using setBounds() method.
-        titleView.setBounds(0,0,TITLE_FULL_WIDTH,50);
-        userLabel.setBounds(START_WIDTH,150,100,30);
-        passwordLabel.setBounds(START_WIDTH,200,100,30);
-        userTextField.setBounds(CENTER_WIDTH,150,200,30);
-        passwordField.setBounds(CENTER_WIDTH,200,200,30);
-        showPassword.setBounds(CENTER_WIDTH,250,200,30);
-        loginButton.setBounds(CENTER_WIDTH,300,100,30);
-
-
+        titleView.setBounds(0, 0, TITLE_FULL_WIDTH, 50);
+        userLabel.setBounds(START_WIDTH, 150, 100, 30);
+        passwordLabel.setBounds(START_WIDTH, 200, 100, 30);
+        userTextField.setBounds(CENTER_WIDTH, 150, 200, 30);
+        passwordField.setBounds(CENTER_WIDTH, 200, 200, 30);
+        showPassword.setBounds(CENTER_WIDTH, 250, 200, 30);
+        loginButton.setBounds(CENTER_WIDTH, 300, 100, 30);
+        registerButton.setBounds(CENTER_WIDTH, 350, 100, 30);
     }
+
     public static BaseScreen getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new Login();
@@ -71,15 +75,10 @@ public class Login extends BaseScreen implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginButton) {
-            final String userText = userTextField.getText();
-            final char[] passwordText = passwordField.getPassword();
-
-            if (AuthenticationManager.getInstance().performUserAuthentication(userText, passwordText)) {
-                showMessage("Usuario logueado exitosamente");
-            } else {
-                showMessage("Usuario o contraseña incorrectos");
-            }
-
+            performLoginAction();
+        }
+        if (e.getSource() == registerButton) {
+            performRegisterAction();
         }
         if (e.getSource() == showPassword) {
             if (showPassword.isSelected()) {
@@ -87,9 +86,40 @@ public class Login extends BaseScreen implements ActionListener {
             } else {
                 passwordField.setEchoChar('*');
             }
-
-
         }
+    }
+
+    private void performLoginAction() {
+        final String userText = userTextField.getText();
+        final String passwordText = passwordField.getText();
+
+        if (AuthenticationManager.getInstance().performUserAuthentication(userText, passwordText)) {
+            showMessage("Usuario logueado exitosamente");
+        } else {
+            showMessage("Usuario o contraseña incorrectos");
+        }
+    }
+
+    private void performRegisterAction() {
+        final String userText = userTextField.getText();
+        final String passwordText = passwordField.getText();
+
+        final UsuarioLogger.RegisterStatus registerStatus = AuthenticationManager.getInstance().performUserRegistration(userText, passwordText);
+        String message;
+        switch (registerStatus) {
+            case DUPLICATED:
+                message = "El usuario ya se encuentra registrado";
+                break;
+            case INVALID:
+                message = "El usuario o contraseña tienen un formato no permitido";
+                break;
+            case SUCCESS:
+                message = "El usuario ha sido registrado correctamente";
+                break;
+            default:
+                message = "Ha ocurrido un error al intentar registrar al usuario.";
+        }
+        showMessage(message);
     }
 
 }
