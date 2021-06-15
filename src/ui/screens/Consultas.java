@@ -12,8 +12,27 @@ public class Consultas extends BaseScreen {
         return INSTANCE;
     }
 
+    private Consultas() {
+        configureView();
+    }
+
     @Override
     public String getTitle() {
         return null;
+    }
+
+    @Override
+    protected void setLocationAndSize() {
+
+    }
+
+    @Override
+    protected void addComponentsToContainer() {
+
+    }
+
+    @Override
+    protected void addActionsEvents() {
+
     }
 }

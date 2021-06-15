@@ -1,6 +1,7 @@
 package ui;
 
 import constants.ScreenName;
+import controllers.IOController;
 import controllers.ScreenManager;
 
 import javax.swing.*;
@@ -62,6 +63,7 @@ public class InterfazPrincipal extends JFrame {
         menuSalirButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent arg0) {
+                IOController.getInstance().saveAll();
                 dispose();
             }
         });

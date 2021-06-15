@@ -6,5 +6,6 @@ public class Dimens {
     public static int TITLE_FULL_WIDTH = 800*3/4;
     public static int CENTER_WIDTH = TITLE_FULL_WIDTH/3;
     public static int START_WIDTH = CENTER_WIDTH/2;
+    public static int END_WIDTH = TITLE_FULL_WIDTH*3/4;
 
 }
