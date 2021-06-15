@@ -131,8 +131,8 @@ public class Actualizaciones extends BaseScreen implements ActionListener {
             if (isbnModified) {
                 showMessage("Se ha modificado correctamente el libro " + bookToModify.getTitulo());
             }
-            reiniciar();
         }
+        reiniciar();
     }
 
     private boolean getBookToModify() {
@@ -166,8 +166,11 @@ public class Actualizaciones extends BaseScreen implements ActionListener {
     private void getIsbnToModify() {
         String isbnToModify = JOptionPane.showInputDialog("ISBN del libro a modificar:");
 
-        while (isbnToModify == null || isbnToModify.isEmpty()) {
+        while (isbnToModify != null && isbnToModify.isEmpty()) {
             isbnToModify = JOptionPane.showInputDialog("El ISBN del libro a modficar no valido.\nIntente nuevamente.");
+        }
+        if(isbnToModify == null){
+            return;
         }
         final Libro bookToSeek = new Libro();
         bookToSeek.setISBN(isbnToModify);

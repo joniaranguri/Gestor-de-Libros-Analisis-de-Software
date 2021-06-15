@@ -59,8 +59,11 @@ public class Bajas extends BaseScreen implements ActionListener {
     private void getIsbnToDelete() {
         String isbnToDelete = JOptionPane.showInputDialog("ISBN del libro a eliminar:");
 
-        while (isbnToDelete == null || isbnToDelete.isEmpty()) {
+        while (isbnToDelete != null && isbnToDelete.isEmpty()) {
             isbnToDelete = JOptionPane.showInputDialog("El ISBN del libro a eliminar no valido.\nIntente nuevamente.");
+        }
+        if (isbnToDelete == null) {
+            return;
         }
         final Libro bookToSeek = new Libro();
         bookToSeek.setISBN(isbnToDelete);
@@ -103,8 +106,8 @@ public class Bajas extends BaseScreen implements ActionListener {
             } else {
                 showMessage("No se encontró registro con el ISBN ingresado");
             }
-            reiniciar();
         }
+        reiniciar();
     }
 
     @Override
