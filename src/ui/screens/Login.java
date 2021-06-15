@@ -23,18 +23,8 @@ public class Login extends BaseScreen implements ActionListener {
     JButton registerButton = new JButton("Registrarse");
     JCheckBox showPassword = new JCheckBox("Mostrar Contraseña");
 
-
     private Login() {
-        setLayout(null);
-        setLocationAndSize();
-        addComponentsToContainer();
-        addActionEvent();
-    }
-
-    public void addActionEvent() {
-        loginButton.addActionListener(this);
-        showPassword.addActionListener(this);
-        registerButton.addActionListener(this);
+        configureView();
     }
 
     public void addComponentsToContainer() {
@@ -46,6 +36,13 @@ public class Login extends BaseScreen implements ActionListener {
         add(showPassword);
         add(loginButton);
         add(registerButton);
+    }
+
+    @Override
+    protected void addActionsEvents() {
+        loginButton.addActionListener(this);
+        showPassword.addActionListener(this);
+        registerButton.addActionListener(this);
     }
 
     public void setLocationAndSize() {

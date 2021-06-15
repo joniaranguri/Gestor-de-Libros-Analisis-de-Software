@@ -11,9 +11,27 @@ public class OrdenarRegistros extends BaseScreen {
         }
         return INSTANCE;
     }
+    private OrdenarRegistros() {
+        configureView();
+    }
 
     @Override
     public String getTitle() {
         return null;
+    }
+
+    @Override
+    protected void setLocationAndSize() {
+
+    }
+
+    @Override
+    protected void addComponentsToContainer() {
+
+    }
+
+    @Override
+    protected void addActionsEvents() {
+
     }
 }

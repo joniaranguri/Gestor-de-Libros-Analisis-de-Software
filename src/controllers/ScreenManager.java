@@ -55,6 +55,6 @@ public class ScreenManager {
     }
 
     private boolean requireLogin(final ScreenName screenName) {
-        return ScreenName.ALTAS.equals(screenName) || ScreenName.BAJAS.equals(screenName);
+        return !ScreenName.LOGIN.equals(screenName) && !AuthenticationManager.getInstance().isUserLogged();
     }
 }

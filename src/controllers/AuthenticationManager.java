@@ -2,10 +2,6 @@ package controllers;
 
 import BL.UsuarioLogger;
 import dtos.Usuario;
-import ui.screens.Login;
-
-import javax.swing.*;
-import java.util.Arrays;
 
 public final class AuthenticationManager {
 
@@ -32,5 +28,9 @@ public final class AuthenticationManager {
     public UsuarioLogger.RegisterStatus performUserRegistration(final String userText, final String passwordText) {
         final Usuario usuarioARegistrar = new Usuario(userText,passwordText);
         return UsuarioLogger.registrar(usuarioARegistrar);
+    }
+
+    public boolean isUserLogged() {
+        return usuarioLogueado != null;
     }
 }

@@ -1,18 +1,8 @@
-import dtos.Libro;
-import interfaces.Funcion;
 import ui.InterfazPrincipal;
-
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
-import java.util.Collections;
-import java.util.Scanner;
-import java.util.Vector;
 
 public class Main {
 
-    public static Scanner teclado = new Scanner(System.in);
+/*    public static Scanner teclado = new Scanner(System.in);
     public static PrintStream out = System.out;
 
     public static void pausar(String mensage) {
@@ -35,14 +25,14 @@ public class Main {
         }
     }
 
-    public static String ruta = "libros.tsv";
+    public static String ruta = "libros.tsv";*/
 
 	public static void main(String[] args) {
 
         final InterfazPrincipal interfazPrincipal = new InterfazPrincipal();
         interfazPrincipal.setVisible(true);
 
-        Funcion<Libro> imprimir = new Funcion<Libro>() {
+    /*    Funcion<Libro> imprimir = new Funcion<Libro>() {
             @Override
             public void funcion(Libro libro, Object parametros) {
                 out.println(libro);
@@ -192,5 +182,5 @@ public class Main {
             salida.close();
         } catch (FileNotFoundException e) {
         }
-	}
+*/	}
 }

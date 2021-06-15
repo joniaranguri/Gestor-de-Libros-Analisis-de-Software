@@ -12,8 +12,27 @@ public class ListarRegistros extends BaseScreen {
         return INSTANCE;
     }
 
+    private ListarRegistros() {
+        configureView();
+    }
+
     @Override
     public String getTitle() {
         return null;
+    }
+
+    @Override
+    protected void setLocationAndSize() {
+
+    }
+
+    @Override
+    protected void addComponentsToContainer() {
+
+    }
+
+    @Override
+    protected void addActionsEvents() {
+
     }
 }
