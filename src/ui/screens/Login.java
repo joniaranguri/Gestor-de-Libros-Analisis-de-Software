@@ -14,14 +14,14 @@ import static constants.Dimens.*;
 public class Login extends BaseScreen implements ActionListener {
     private static BaseScreen INSTANCE;
     private static final String LOGIN_TITLE = "Bienvenido al Gestor de Libros \n" +
-            "Inicie sesión para continuar";
+            "Inicie sesi\u00f3n para continuar";
     JLabel userLabel = new JLabel("Usuario");
-    JLabel passwordLabel = new JLabel("Contraseña");
+    JLabel passwordLabel = new JLabel("Contrase\u00f1a");
     JTextField userTextField = new JTextField();
     JPasswordField passwordField = new JPasswordField();
     JButton loginButton = new JButton("Acceder");
     JButton registerButton = new JButton("Registrarse");
-    JCheckBox showPassword = new JCheckBox("Mostrar Contraseña");
+    JCheckBox showPassword = new JCheckBox("Mostrar Contrase\u00f1a");
 
 
     private Login() {
