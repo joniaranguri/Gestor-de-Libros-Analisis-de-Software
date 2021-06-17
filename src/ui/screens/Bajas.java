@@ -20,15 +20,15 @@ public class Bajas extends BaseScreen implements ActionListener {
     JLabel tituloLabel = new JLabel("Titulo :");
     JLabel autorLabel = new JLabel("Autor :");
     JLabel editorialLabel = new JLabel("Editorial :");
-    JLabel ediciónLabel = new JLabel("Edición :");
-    JLabel añoDePublicaciónLabel = new JLabel("Año de publicación :");
+    JLabel edicionLabel = new JLabel("Edici\u00f3n :");
+    JLabel anioDePublicacionLabel = new JLabel("A\u00f1o de publicaci\u00f3n :");
     JLabel isbnLabel = new JLabel("ISBN :");
 
     JLabel tituloValueLabel = new JLabel();
     JLabel autorValueLabel = new JLabel();
     JLabel editorialValueLabel = new JLabel();
     JLabel edicionValueLabel = new JLabel();
-    JLabel añoDePublicacionValueLabel = new JLabel();
+    JLabel anioDePublicacionValueLabel = new JLabel();
     JLabel isbnValueLabel = new JLabel();
 
     JButton deleteButton = new JButton(INICIAR);
@@ -50,9 +50,9 @@ public class Bajas extends BaseScreen implements ActionListener {
         final Font f = tituloLabel.getFont();
         tituloLabel.setFont(f.deriveFont(f.getStyle() | Font.BOLD));
         autorLabel.setFont(f.deriveFont(f.getStyle() | Font.BOLD));
-        ediciónLabel.setFont(f.deriveFont(f.getStyle() | Font.BOLD));
+        edicionLabel.setFont(f.deriveFont(f.getStyle() | Font.BOLD));
         editorialLabel.setFont(f.deriveFont(f.getStyle() | Font.BOLD));
-        añoDePublicaciónLabel.setFont(f.deriveFont(f.getStyle() | Font.BOLD));
+        anioDePublicacionLabel.setFont(f.deriveFont(f.getStyle() | Font.BOLD));
         isbnLabel.setFont(f.deriveFont(f.getStyle() | Font.BOLD));
     }
 
@@ -71,7 +71,7 @@ public class Bajas extends BaseScreen implements ActionListener {
         if (bookToDelete != null) {
             showLibro();
         } else {
-            showMessage("No se encontró registro con el ISBN ingresado");
+            showMessage("No se encontr\u00f3 registro con el ISBN ingresado");
             reiniciar();
         }
     }
@@ -81,7 +81,7 @@ public class Bajas extends BaseScreen implements ActionListener {
         autorValueLabel.setText("");
         edicionValueLabel.setText("");
         editorialValueLabel.setText("");
-        añoDePublicacionValueLabel.setText("");
+        anioDePublicacionValueLabel.setText("");
         isbnValueLabel.setText("");
         deleteButton.setText("Iniciar");
     }
@@ -91,7 +91,7 @@ public class Bajas extends BaseScreen implements ActionListener {
         autorValueLabel.setText(bookToDelete.getAutor());
         edicionValueLabel.setText(String.valueOf(bookToDelete.getEdicion()));
         editorialValueLabel.setText(bookToDelete.getEditorial());
-        añoDePublicacionValueLabel.setText(String.valueOf(bookToDelete.getAnno_de_publicacion()));
+        anioDePublicacionValueLabel.setText(String.valueOf(bookToDelete.getAnno_de_publicacion()));
         isbnValueLabel.setText(bookToDelete.getISBN());
         deleteButton.setText(ELIMINAR);
     }
@@ -104,7 +104,7 @@ public class Bajas extends BaseScreen implements ActionListener {
             if (isbnDeleted) {
                 showMessage("Se ha eliminado correctamente el libro " + bookToDelete.getTitulo());
             } else {
-                showMessage("No se encontró registro con el ISBN ingresado");
+                showMessage("No se encontr\u00f3 registro con el ISBN ingresado");
             }
         }
         reiniciar();
@@ -122,14 +122,14 @@ public class Bajas extends BaseScreen implements ActionListener {
         tituloLabel.setBounds(CENTER_WIDTH, 30, 200, 30);
         autorLabel.setBounds(CENTER_WIDTH, 90, 200, 30);
         editorialLabel.setBounds(CENTER_WIDTH, 150, 200, 30);
-        ediciónLabel.setBounds(CENTER_WIDTH, 210, 200, 30);
-        añoDePublicaciónLabel.setBounds(CENTER_WIDTH, 270, 200, 30);
+        edicionLabel.setBounds(CENTER_WIDTH, 210, 200, 30);
+        anioDePublicacionLabel.setBounds(CENTER_WIDTH, 270, 200, 30);
         isbnLabel.setBounds(CENTER_WIDTH, 330, 200, 30);
         tituloValueLabel.setBounds(CENTER_WIDTH, 60, 200, 30);
         autorValueLabel.setBounds(CENTER_WIDTH, 120, 200, 30);
         editorialValueLabel.setBounds(CENTER_WIDTH, 180, 200, 30);
         edicionValueLabel.setBounds(CENTER_WIDTH, 240, 200, 30);
-        añoDePublicacionValueLabel.setBounds(CENTER_WIDTH, 300, 200, 30);
+        anioDePublicacionValueLabel.setBounds(CENTER_WIDTH, 300, 200, 30);
         isbnValueLabel.setBounds(CENTER_WIDTH, 360, 200, 30);
         deleteButton.setBounds(CENTER_WIDTH, 420, 100, 30);
     }
@@ -143,10 +143,10 @@ public class Bajas extends BaseScreen implements ActionListener {
         add(autorValueLabel);
         add(editorialLabel);
         add(editorialValueLabel);
-        add(ediciónLabel);
+        add(edicionLabel);
         add(edicionValueLabel);
-        add(añoDePublicaciónLabel);
-        add(añoDePublicacionValueLabel);
+        add(anioDePublicacionLabel);
+        add(anioDePublicacionValueLabel);
         add(isbnLabel);
         add(isbnValueLabel);
         add(deleteButton);

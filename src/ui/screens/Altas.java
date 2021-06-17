@@ -17,15 +17,15 @@ public class Altas extends BaseScreen implements ActionListener {
     JLabel tituloLabel = new JLabel("Titulo");
     JLabel autorLabel = new JLabel("Autor");
     JLabel editorialLabel = new JLabel("Editorial");
-    JLabel ediciónLabel = new JLabel("Edición");
-    JLabel añoDePublicaciónLabel = new JLabel("Año de publicación");
+    JLabel edicionLabel = new JLabel("Edici\u00f3n");
+    JLabel anioDePublicacionLabel = new JLabel("A\u00f1o de publicaci\u00f3n");
     JLabel isbnLabel = new JLabel("ISBN");
 
     JTextField tituloTextField = new JTextField();
     JTextField autorTextField = new JTextField();
     JTextField editorialTextField = new JTextField();
     JTextField edicionTextField = new JTextField();
-    JTextField añoDePublicacionTextField = new JTextField();
+    JTextField anioDePublicacionTextField = new JTextField();
     JTextField isbnTextField = new JTextField();
 
     JButton altaButton = new JButton("Dar de alta");
@@ -48,14 +48,14 @@ public class Altas extends BaseScreen implements ActionListener {
         tituloLabel.setBounds(CENTER_WIDTH, 30, 200, 30);
         autorLabel.setBounds(CENTER_WIDTH, 90, 200, 30);
         editorialLabel.setBounds(CENTER_WIDTH, 150, 200, 30);
-        ediciónLabel.setBounds(CENTER_WIDTH, 210, 200, 30);
-        añoDePublicaciónLabel.setBounds(CENTER_WIDTH, 270, 200, 30);
+        edicionLabel.setBounds(CENTER_WIDTH, 210, 200, 30);
+        anioDePublicacionLabel.setBounds(CENTER_WIDTH, 270, 200, 30);
         isbnLabel.setBounds(CENTER_WIDTH, 330, 200, 30);
         tituloTextField.setBounds(CENTER_WIDTH, 60, 200, 30);
         autorTextField.setBounds(CENTER_WIDTH, 120, 200, 30);
         editorialTextField.setBounds(CENTER_WIDTH, 180, 200, 30);
         edicionTextField.setBounds(CENTER_WIDTH, 240, 200, 30);
-        añoDePublicacionTextField.setBounds(CENTER_WIDTH, 300, 200, 30);
+        anioDePublicacionTextField.setBounds(CENTER_WIDTH, 300, 200, 30);
         isbnTextField.setBounds(CENTER_WIDTH, 360, 200, 30);
         altaButton.setBounds(CENTER_WIDTH, 420, 100, 30);
     }
@@ -69,10 +69,10 @@ public class Altas extends BaseScreen implements ActionListener {
         add(autorTextField);
         add(editorialLabel);
         add(editorialTextField);
-        add(ediciónLabel);
+        add(edicionLabel);
         add(edicionTextField);
-        add(añoDePublicaciónLabel);
-        add(añoDePublicacionTextField);
+        add(anioDePublicacionLabel);
+        add(anioDePublicacionTextField);
         add(isbnLabel);
         add(isbnTextField);
         add(altaButton);
@@ -97,23 +97,23 @@ public class Altas extends BaseScreen implements ActionListener {
 
     private void performAltaLibro() {
         final Integer edicion = IOController.leerEntero(edicionTextField);
-        final Integer añoPublicacion = IOController.leerEntero(añoDePublicacionTextField);
+        final Integer anioPublicacion = IOController.leerEntero(anioDePublicacionTextField);
         final String isbn = isbnTextField.getText();
 
-        final boolean hasErrors = edicion == null || añoPublicacion == null || (isbn == null || isbn.isEmpty());
+        final boolean hasErrors = edicion == null || anioPublicacion == null || (isbn == null || isbn.isEmpty());
 
         if (hasErrors) {
             showMessage("Se detectaron los siguientes errores:\n" +
-                    (edicion == null ? "* Edición debe ser un número\n" : "")
-                    + (añoPublicacion == null ? "* Año de publicación debe ser un número\n" : "")
-                    + (isbn == null || isbn.isEmpty() ? "* El ISBN no puede quedar vacío\n" : ""));
+                    (edicion == null ? "* Edici\u00f3n debe ser un n\u00famero\n" : "")
+                    + (anioPublicacion == null ? "* A\u00f1o de publicaci\u00f3n debe ser un n\u00famero\n" : "")
+                    + (isbn == null || isbn.isEmpty() ? "* El ISBN no puede quedar vacio\n" : ""));
             return;
         }
         final boolean libroGuardado = guardarLibro();
         if (libroGuardado) {
             showMessage("El libro se ha guardado exitosamente");
         } else {
-            showMessage("El libro que intenta guardar ya está dado de alta");
+            showMessage("El libro que intenta guardar ya est\u00e1 dado de alta");
         }
         reiniciar();
 
@@ -124,7 +124,7 @@ public class Altas extends BaseScreen implements ActionListener {
         autorTextField.setText("");
         editorialTextField.setText("");
         edicionTextField.setText("");
-        añoDePublicacionTextField.setText("");
+        anioDePublicacionTextField.setText("");
         isbnTextField.setText("");
     }
 
@@ -134,7 +134,7 @@ public class Altas extends BaseScreen implements ActionListener {
         final String author = autorTextField.getText();
         final String editorial = editorialTextField.getText();
         final String edition = edicionTextField.getText();
-        final String yearOfPublish = añoDePublicacionTextField.getText();
+        final String yearOfPublish = anioDePublicacionTextField.getText();
 
         final Libro libro = new Libro();
         libro.setISBN(isbn);

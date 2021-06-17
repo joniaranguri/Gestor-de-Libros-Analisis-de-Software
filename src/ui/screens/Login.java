@@ -93,7 +93,7 @@ public class Login extends BaseScreen implements ActionListener {
         if (AuthenticationManager.getInstance().performUserAuthentication(userText, passwordText)) {
             showMessage("Usuario logueado exitosamente");
         } else {
-            showMessage("Usuario o contraseña incorrectos");
+            showMessage("Usuario o contrase\u00f1a incorrectos");
         }
     }
 
