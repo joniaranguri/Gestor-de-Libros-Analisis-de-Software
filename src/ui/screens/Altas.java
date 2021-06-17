@@ -57,7 +57,7 @@ public class Altas extends BaseScreen implements ActionListener {
         edicionTextField.setBounds(CENTER_WIDTH, 240, 200, 30);
         anioDePublicacionTextField.setBounds(CENTER_WIDTH, 300, 200, 30);
         isbnTextField.setBounds(CENTER_WIDTH, 360, 200, 30);
-        altaButton.setBounds(CENTER_WIDTH, 420, 100, 30);
+        altaButton.setBounds(CENTER_WIDTH, 420, 200, 30);
     }
 
     @Override
@@ -119,7 +119,8 @@ public class Altas extends BaseScreen implements ActionListener {
 
     }
 
-    private void reiniciar() {
+    @Override
+    public void reiniciar() {
         tituloTextField.setText("");
         autorTextField.setText("");
         editorialTextField.setText("");

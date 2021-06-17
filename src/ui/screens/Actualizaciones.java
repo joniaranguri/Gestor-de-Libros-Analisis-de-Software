@@ -64,10 +64,10 @@ public class Actualizaciones extends BaseScreen implements ActionListener {
         autorTextField.setBounds(CENTER_WIDTH, 120, 200, 30);
         editorialTextField.setBounds(CENTER_WIDTH, 180, 200, 30);
         edicionTextField.setBounds(CENTER_WIDTH, 240, 200, 30);
-        anioDePublicacionLabel.setBounds(CENTER_WIDTH, 300, 200, 30);
+        anioDePublicacionTextField.setBounds(CENTER_WIDTH, 300, 200, 30);
         isbnTextField.setBounds(CENTER_WIDTH, 360, 200, 30);
         isbnTextField.setEnabled(false);
-        modifyButton.setBounds(CENTER_WIDTH, 420, 100, 30);
+        modifyButton.setBounds(CENTER_WIDTH, 420, 200, 30);
     }
 
     @Override
@@ -93,7 +93,8 @@ public class Actualizaciones extends BaseScreen implements ActionListener {
         modifyButton.addActionListener(this);
     }
 
-    private void reiniciar() {
+    @Override
+    public void reiniciar() {
         tituloTextField.setText("");
         autorTextField.setText("");
         editorialTextField.setText("");
@@ -122,7 +123,7 @@ public class Actualizaciones extends BaseScreen implements ActionListener {
 
     private void confirmModify() {
         int dialogButton = JOptionPane.YES_NO_OPTION;
-        int dialogResult = JOptionPane.showConfirmDialog(this, "Estas seguro que queres modificar a " + bookToModify.getTitulo(), "Confirmar borrado", dialogButton);
+        int dialogResult = JOptionPane.showConfirmDialog(this, "Estas seguro que queres modificar a " + bookToModify.getTitulo() + "?", "Confirmar borrado", dialogButton);
         if (dialogResult == 0) {
             if (!getBookToModify()) {
                 return;
@@ -169,7 +170,7 @@ public class Actualizaciones extends BaseScreen implements ActionListener {
         while (isbnToModify != null && isbnToModify.isEmpty()) {
             isbnToModify = JOptionPane.showInputDialog("El ISBN del libro a modficar no valido.\nIntente nuevamente.");
         }
-        if(isbnToModify == null){
+        if (isbnToModify == null) {
             return;
         }
         final Libro bookToSeek = new Libro();

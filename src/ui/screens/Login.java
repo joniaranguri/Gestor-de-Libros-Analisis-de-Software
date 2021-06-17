@@ -47,6 +47,11 @@ public class Login extends BaseScreen implements ActionListener {
         registerButton.addActionListener(this);
     }
 
+    @Override
+    public void reiniciar() {
+        //No hacer nada
+    }
+
     public void setLocationAndSize() {
         //Setting location and Size of each components using setBounds() method.
         titleView.setBounds(0, 0, TITLE_FULL_WIDTH, 50);

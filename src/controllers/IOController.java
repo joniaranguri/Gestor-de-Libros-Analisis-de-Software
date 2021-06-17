@@ -6,20 +6,21 @@ import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintStream;
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.Vector;
 
 public class IOController {
     private static IOController INSTANCE;
     public static String ruta = "libros.tsv";
-    private Vector<Libro> vectorLibros = new Vector<>();
+    private final Vector<Libro> vectorLibros = new Vector<>();
 
     private IOController() {
         leerRegistros();
     }
 
     private void leerRegistros() {
-         String[] campos;
+        String[] campos;
         try {
             Scanner entrada = new Scanner(new FileReader(ruta));
             while (entrada.hasNextLine()) {
@@ -112,5 +113,13 @@ public class IOController {
         currentBook.setTitulo(bookToModify.getTitulo());
         return true;
 
+    }
+
+    public Vector<Libro> getVectorLibros() {
+        return this.vectorLibros;
+    }
+
+    public void ordenarLibros() {
+        Collections.sort(vectorLibros);
     }
 }

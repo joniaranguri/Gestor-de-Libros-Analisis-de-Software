@@ -16,10 +16,14 @@ public abstract class BaseScreen extends JPanel {
         JOptionPane.showMessageDialog(this, message);
 
     }
+    public void onAttach(){
+        reiniciar();
+    }
 
     protected abstract String getTitle();
     protected abstract void setLocationAndSize();
     protected abstract void addComponentsToContainer();
     protected abstract void addActionsEvents();
+    public abstract void reiniciar();
 
 }

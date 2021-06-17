@@ -76,7 +76,8 @@ public class Bajas extends BaseScreen implements ActionListener {
         }
     }
 
-    private void reiniciar() {
+    @Override
+    public void reiniciar() {
         tituloValueLabel.setText("");
         autorValueLabel.setText("");
         edicionValueLabel.setText("");
@@ -98,7 +99,7 @@ public class Bajas extends BaseScreen implements ActionListener {
 
     private void confirmDelete() {
         int dialogButton = JOptionPane.YES_NO_OPTION;
-        int dialogResult = JOptionPane.showConfirmDialog(this, "Estas seguro que queres borrar a " + bookToDelete.getTitulo(), "Confirmar borrado", dialogButton);
+        int dialogResult = JOptionPane.showConfirmDialog(this, "Estas seguro que queres borrar a " + bookToDelete.getTitulo() + "?", "Confirmar borrado", dialogButton);
         if (dialogResult == 0) {
             final boolean isbnDeleted = IOController.getInstance().deleteBook(bookToDelete);
             if (isbnDeleted) {
@@ -131,7 +132,7 @@ public class Bajas extends BaseScreen implements ActionListener {
         edicionValueLabel.setBounds(CENTER_WIDTH, 240, 200, 30);
         anioDePublicacionValueLabel.setBounds(CENTER_WIDTH, 300, 200, 30);
         isbnValueLabel.setBounds(CENTER_WIDTH, 360, 200, 30);
-        deleteButton.setBounds(CENTER_WIDTH, 420, 100, 30);
+        deleteButton.setBounds(CENTER_WIDTH, 420, 200, 30);
     }
 
     @Override
@@ -165,7 +166,7 @@ public class Bajas extends BaseScreen implements ActionListener {
                 if (hayRegistros) {
                     getIsbnToDelete();
                 } else {
-                    showMessage("No hay registros para modificar");
+                    showMessage("No hay registros para eliminar");
                 }
             } else {
                 confirmDelete();

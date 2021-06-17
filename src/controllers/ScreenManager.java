@@ -49,6 +49,7 @@ public class ScreenManager {
         }
         contentPane.removeAll();
         contentPane.repaint();
+        screenToNavigate.onAttach();
         contentPane.add(screenToNavigate, BorderLayout.CENTER);
         contentPane.revalidate();
 
