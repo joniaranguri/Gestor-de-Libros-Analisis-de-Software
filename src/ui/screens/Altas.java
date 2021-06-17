@@ -100,13 +100,14 @@ public class Altas extends BaseScreen implements ActionListener {
         final Integer anioPublicacion = IOController.leerEntero(anioDePublicacionTextField);
         final String isbn = isbnTextField.getText();
 
-        final boolean hasErrors = edicion == null || anioPublicacion == null || (isbn == null || isbn.isEmpty());
+        final boolean hasErrors = edicion == null || anioPublicacion == null || (isbn == null || isbn.isEmpty() || isbn.length() != 13 );
 
         if (hasErrors) {
             showMessage("Se detectaron los siguientes errores:\n" +
                     (edicion == null ? "* Edici\u00f3n debe ser un n\u00famero\n" : "")
                     + (anioPublicacion == null ? "* A\u00f1o de publicaci\u00f3n debe ser un n\u00famero\n" : "")
-                    + (isbn == null || isbn.isEmpty() ? "* El ISBN no puede quedar vacio\n" : ""));
+                    + (isbn == null || isbn.isEmpty() ? "* El ISBN no puede quedar vacio\n" : "")
+                    + (isbn.length() != 13? "* El ISBN debe estar compuesto por 13 car\u00e1cteres\n" : ""));
             return;
         }
         final boolean libroGuardado = guardarLibro();
