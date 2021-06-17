@@ -3,6 +3,7 @@ package ui;
 import constants.ScreenName;
 import controllers.IOController;
 import controllers.ScreenManager;
+import controllers.AuthenticationManager;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -10,6 +11,8 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import static constants.Dimens.WINDOW_HEIGHT;
 import static constants.Dimens.WINDOW_WIDTH;
@@ -37,6 +40,29 @@ public class InterfazPrincipal extends JFrame {
         addViewsToContentPane();
         this.screenManager = new ScreenManager(mainPanel);
         screenManager.goToScreen(ScreenName.LOGIN);
+        addExitListener();
+    }
+
+    private void addExitListener() {
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                exitAndSaveConfirmation();
+            }
+        });
+    }
+
+    private void exitAndSaveConfirmation() {
+        if (!AuthenticationManager.getInstance().isUserLogged()) {
+            return;
+        }
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog(this, "Vas a salir.\nSe deben guardar los registros?", "Confirmar", dialogButton);
+        if (dialogResult == 0) {
+            IOController.getInstance().saveAll();
+            JOptionPane.showMessageDialog(this, "Se han guardado correctamente los registros");
+        }
+
     }
 
     private void addViewsToContentPane() {
@@ -63,7 +89,7 @@ public class InterfazPrincipal extends JFrame {
         menuSalirButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent arg0) {
-                IOController.getInstance().saveAll();
+                exitAndSaveConfirmation();
                 dispose();
             }
         });
