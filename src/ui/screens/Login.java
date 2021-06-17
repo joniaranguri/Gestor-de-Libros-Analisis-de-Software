@@ -1,7 +1,9 @@
 package ui.screens;
 
 import BL.UsuarioLogger;
+import constants.ScreenName;
 import controllers.AuthenticationManager;
+import controllers.ScreenManager;
 import ui.screens.base.BaseScreen;
 
 import javax.swing.*;
@@ -92,6 +94,7 @@ public class Login extends BaseScreen implements ActionListener {
 
         if (AuthenticationManager.getInstance().performUserAuthentication(userText, passwordText)) {
             showMessage("Usuario logueado exitosamente");
+            new ScreenManager(this).goToScreen(ScreenName.ALTAS);
         } else {
             showMessage("Usuario o contrase\u00f1a incorrectos");
         }
