@@ -100,7 +100,7 @@ public class Altas extends BaseScreen implements ActionListener {
         final Integer anioPublicacion = IOController.leerEntero(anioDePublicacionTextField);
         final String isbn = isbnTextField.getText();
 
-        final boolean hasErrors = edicion == null || anioPublicacion == null || (isbn == null || isbn.isEmpty() || isbn.length() != 13 );
+        final boolean hasErrors = edicion == null || anioPublicacion == null || (isbn == null || isbn.length() != 13);
 
         if (hasErrors) {
             showMessage("Se detectaron los siguientes errores:\n" +
