@@ -179,7 +179,7 @@ public class Actualizaciones extends BaseScreen implements ActionListener {
     private void getIsbnToModify() {
         //Necesitamos obtener el ISBN del libro a modificar
         String isbnToModify = JOptionPane.showInputDialog("ISBN del libro a modificar:");
-/       //EL ISBN no puede no tener 13 caracteres
+        //EL ISBN no puede no tener 13 caracteres
         while (isbnToModify != null && isbnToModify.length() != 13) {
             isbnToModify = JOptionPane.showInputDialog("El ISBN del libro a modficar no valido.\nIntente nuevamente.");
         }
