@@ -4,6 +4,7 @@ import dtos.Usuario;
 import helpers.Encryptor;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
@@ -15,7 +16,7 @@ public class UsuarioLogger {
         SUCCESS,ERROR,DUPLICATED,INVALID
     }
 
-    public static String FILE_PATH = "../files/users.txt";
+    public static String FILE_PATH = "users.txt";
 
     public static RegisterStatus registrar(final Usuario usuario) {
 
@@ -27,9 +28,13 @@ public class UsuarioLogger {
 
         boolean isValidUser = validarUsuario(usuario);
         if (!isValidUser)
-           return RegisterStatus.INVALID;
+            return RegisterStatus.INVALID;
         try {
-            reader = new Scanner(new File(FILE_PATH));
+            File yourFile = new File(FILE_PATH);
+            if (!yourFile.exists()) {
+                yourFile.createNewFile();
+            }
+            reader = new Scanner(yourFile);
             while (reader.hasNextLine()) {
                 linea = reader.nextLine();
                 // Cada linea se guardara con el formato USERNAME|PASSWORD
