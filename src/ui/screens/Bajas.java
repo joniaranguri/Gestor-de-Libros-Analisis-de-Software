@@ -35,6 +35,9 @@ public class Bajas extends BaseScreen implements ActionListener {
     private Libro bookToDelete;
 
     public static BaseScreen getInstance() {
+        //No queremos que cada vez que se clickee sobre la opcion
+        //se cree una nueva instancia de la pantalla
+        //Para evitar eso usamos el patron Singleton
         if (INSTANCE == null) {
             INSTANCE = new Bajas();
         }
@@ -47,6 +50,7 @@ public class Bajas extends BaseScreen implements ActionListener {
     }
 
     private void setLabelsStyle() {
+        //Seteo el font de los labels en bold para poder resaltarlos de los valores
         final Font f = tituloLabel.getFont();
         tituloLabel.setFont(f.deriveFont(f.getStyle() | Font.BOLD));
         autorLabel.setFont(f.deriveFont(f.getStyle() | Font.BOLD));
@@ -57,27 +61,35 @@ public class Bajas extends BaseScreen implements ActionListener {
     }
 
     private void getIsbnToDelete() {
+        //Necesitamos obtener el ISBN al cual vamos a eliminar
         String isbnToDelete = JOptionPane.showInputDialog("ISBN del libro a eliminar:");
-
-        while (isbnToDelete != null && isbnToDelete.isEmpty()) {
+        //El isbn no puede tener un largo distinto de 13
+        //Sino se cumple la restriccion, volvemos a pedir el ISBN
+        while (isbnToDelete != null && isbnToDelete.length()!= 13) {
             isbnToDelete = JOptionPane.showInputDialog("El ISBN del libro a eliminar no valido.\nIntente nuevamente.");
         }
+        //Si se selecciono cancelar, no hay nada mas que hacer
         if (isbnToDelete == null) {
             return;
         }
+        // Si llegue aca, tengo que eliminar el libro
         final Libro bookToSeek = new Libro();
         bookToSeek.setISBN(isbnToDelete);
+        //Le pido al controlador de entrada salida que elimine el libro
         bookToDelete = IOController.getInstance().getLibro(bookToSeek);
+        //Informamos el resultado
         if (bookToDelete != null) {
             showLibro();
         } else {
             showMessage("No se encontr\u00f3 registro con el ISBN ingresado");
+            //Reiniciamos para permitir nuevas bajas
             reiniciar();
         }
     }
 
     @Override
     public void reiniciar() {
+        //Seteamos en blanco todos los labels
         tituloValueLabel.setText("");
         autorValueLabel.setText("");
         edicionValueLabel.setText("");
@@ -88,6 +100,7 @@ public class Bajas extends BaseScreen implements ActionListener {
     }
 
     private void showLibro() {
+        //Mostramos los valores del libro a eliminar
         tituloValueLabel.setText(bookToDelete.getTitulo());
         autorValueLabel.setText(bookToDelete.getAutor());
         edicionValueLabel.setText(String.valueOf(bookToDelete.getEdicion()));
@@ -98,6 +111,7 @@ public class Bajas extends BaseScreen implements ActionListener {
     }
 
     private void confirmDelete() {
+        //Vamos a pedir confirmacion para borrar un registro
         int dialogButton = JOptionPane.YES_NO_OPTION;
         int dialogResult = JOptionPane.showConfirmDialog(this, "Estas seguro que queres borrar a " + bookToDelete.getTitulo() + "?", "Confirmar borrado", dialogButton);
         if (dialogResult == 0) {
@@ -108,6 +122,7 @@ public class Bajas extends BaseScreen implements ActionListener {
                 showMessage("No se encontr\u00f3 registro con el ISBN ingresado");
             }
         }
+        //Al terminar el proceso necesitamos reiniciar la pantalla
         reiniciar();
     }
 
@@ -118,7 +133,7 @@ public class Bajas extends BaseScreen implements ActionListener {
 
     @Override
     protected void setLocationAndSize() {
-        //Setting location and Size of each components using setBounds() method.
+        //Se configuran los anchos,altos, y posiciones de las vistas
         titleView.setBounds(0, 0, TITLE_FULL_WIDTH, 50);
         tituloLabel.setBounds(CENTER_WIDTH, 30, 200, 30);
         autorLabel.setBounds(CENTER_WIDTH, 90, 200, 30);
@@ -137,6 +152,7 @@ public class Bajas extends BaseScreen implements ActionListener {
 
     @Override
     protected void addComponentsToContainer() {
+        //Se agregan las vistas al contenedor de la pantalla
         add(titleView);
         add(tituloLabel);
         add(tituloValueLabel);
@@ -162,6 +178,7 @@ public class Bajas extends BaseScreen implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == deleteButton) {
             if (deleteButton.getText().equals(INICIAR)) {
+                //Si no hay registros no se puede eliminar nada
                 final boolean hayRegistros = IOController.getInstance().hasRegisters();
                 if (hayRegistros) {
                     getIsbnToDelete();
