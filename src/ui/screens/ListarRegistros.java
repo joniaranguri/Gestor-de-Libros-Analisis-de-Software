@@ -12,6 +12,9 @@ public class ListarRegistros extends BaseScreen {
     private static BaseScreen INSTANCE;
 
     public static BaseScreen getInstance() {
+        //No queremos que cada vez que se clickee sobre la opcion
+        //se cree una nueva instancia de la pantalla
+        //Para evitar eso usamos el patron Singleton
         if (INSTANCE == null) {
             INSTANCE = new ListarRegistros();
         }
@@ -30,24 +33,24 @@ public class ListarRegistros extends BaseScreen {
 
     @Override
     protected void setLocationAndSize() {
-
-
-            setLayout(new BorderLayout());
-            addComponentsToContainer();
+        //Se configuran los anchos,altos, y posiciones de las vistas
+        setLayout(new BorderLayout());
+        addComponentsToContainer();
     }
 
     @Override
     protected void addComponentsToContainer() {
-            final ArrayList<String> labels = getLabels();
-            final int sizeList = labels.size();
-            final JList<String> listArea = new JList<>(labels.toArray(new String[sizeList]));
-            listArea.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-            listArea.setFont(new Font("Serif", Font.PLAIN, 14));
-            JScrollPane listScroller = new JScrollPane();
-            listScroller.setViewportView(listArea);
-            listArea.setLayoutOrientation(JList.VERTICAL);
-            add(listScroller, BorderLayout.CENTER);
-            add(titleView, BorderLayout.NORTH);
+        //Se agregan las vistas al contenedor de la pantalla
+        final ArrayList<String> labels = getLabels();
+        final int sizeList = labels.size();
+        final JList<String> listArea = new JList<>(labels.toArray(new String[sizeList]));
+        listArea.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        listArea.setFont(new Font("Serif", Font.PLAIN, 14));
+        JScrollPane listScroller = new JScrollPane();
+        listScroller.setViewportView(listArea);
+        listArea.setLayoutOrientation(JList.VERTICAL);
+        add(listScroller, BorderLayout.CENTER);
+        add(titleView, BorderLayout.NORTH);
     }
 
     private ArrayList<String> getLabels() {
@@ -66,7 +69,7 @@ public class ListarRegistros extends BaseScreen {
 
     @Override
     protected void addActionsEvents() {
-    //Nada para hacer
+        //Nada para hacer
     }
 
     @Override

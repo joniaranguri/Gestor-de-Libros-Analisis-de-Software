@@ -30,6 +30,7 @@ public class Login extends BaseScreen implements ActionListener {
     }
 
     public void addComponentsToContainer() {
+        //Se agregan las vistas al contenedor de la pantalla
         add(titleView);
         add(userLabel);
         add(passwordLabel);
@@ -53,7 +54,7 @@ public class Login extends BaseScreen implements ActionListener {
     }
 
     public void setLocationAndSize() {
-        //Setting location and Size of each components using setBounds() method.
+        //Se configuran los anchos,altos, y posiciones de las vistas
         titleView.setBounds(0, 0, TITLE_FULL_WIDTH, 50);
         userLabel.setBounds(START_WIDTH, 150, 100, 30);
         passwordLabel.setBounds(START_WIDTH, 200, 100, 30);
@@ -65,6 +66,9 @@ public class Login extends BaseScreen implements ActionListener {
     }
 
     public static BaseScreen getInstance() {
+        //No queremos que cada vez que se clickee sobre la opcion
+        //se cree una nueva instancia de la pantalla
+        //Para evitar eso usamos el patron Singleton
         if (INSTANCE == null) {
             INSTANCE = new Login();
         }

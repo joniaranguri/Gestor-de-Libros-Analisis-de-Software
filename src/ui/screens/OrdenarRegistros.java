@@ -17,6 +17,9 @@ public class OrdenarRegistros extends BaseScreen implements ActionListener {
     JButton orderButton = new JButton(ORDENAR);
 
     public static BaseScreen getInstance() {
+        //No queremos que cada vez que se clickee sobre la opcion
+        //se cree una nueva instancia de la pantalla
+        //Para evitar eso usamos el patron Singleton
         if (INSTANCE == null) {
             INSTANCE = new OrdenarRegistros();
         }
@@ -34,12 +37,14 @@ public class OrdenarRegistros extends BaseScreen implements ActionListener {
 
     @Override
     protected void setLocationAndSize() {
+        //Se configuran los anchos,altos, y posiciones de las vistas
         titleView.setBounds(0, 0, TITLE_FULL_WIDTH, 50);
         orderButton.setBounds(CENTER_WIDTH, 200, 200, 30);
     }
 
     @Override
     protected void addComponentsToContainer() {
+        //Se agregan las vistas al contenedor de la pantalla
         add(titleView);
         add(orderButton);
     }

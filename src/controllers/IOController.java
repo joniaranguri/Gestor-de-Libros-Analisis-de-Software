@@ -38,6 +38,9 @@ public class IOController {
     }
 
     public static IOController getInstance() {
+        //No queremos que cada vez que se clickee sobre la opcion
+        //se cree una nueva instancia de la clase
+        //Para evitar eso usamos el patron Singleton
         if (INSTANCE == null) {
             INSTANCE = new IOController();
         }

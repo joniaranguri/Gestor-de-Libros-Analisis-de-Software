@@ -33,6 +33,9 @@ public class Consultas extends BaseScreen implements ActionListener {
     private Libro bookToShow;
 
     public static BaseScreen getInstance() {
+        //No queremos que cada vez que se clickee sobre la opcion
+        //se cree una nueva instancia de la pantalla
+        //Para evitar eso usamos el patron Singleton
         if (INSTANCE == null) {
             INSTANCE = new Consultas();
         }
@@ -50,7 +53,7 @@ public class Consultas extends BaseScreen implements ActionListener {
 
     @Override
     protected void setLocationAndSize() {
-        //Setting location and Size of each components using setBounds() method.
+        //Se configuran los anchos,altos, y posiciones de las vistas
         titleView.setBounds(0, 0, TITLE_FULL_WIDTH, 50);
         tituloLabel.setBounds(CENTER_WIDTH, 30, 200, 30);
         autorLabel.setBounds(CENTER_WIDTH, 90, 200, 30);
@@ -80,6 +83,7 @@ public class Consultas extends BaseScreen implements ActionListener {
 
     @Override
     protected void addComponentsToContainer() {
+        //Se agregan las vistas al contenedor de la pantalla
         add(titleView);
         add(tituloLabel);
         add(tituloTextField);
