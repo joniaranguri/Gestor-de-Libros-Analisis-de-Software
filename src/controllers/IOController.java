@@ -1,5 +1,6 @@
 package controllers;
 
+import BL.LoggerFile;
 import dtos.Libro;
 
 import javax.swing.*;
@@ -54,6 +55,8 @@ public class IOController {
         archivo.print(libro.getEditorial() + "\t");
         archivo.print(libro.getEdicion() + "\t");
         archivo.print(libro.getAnno_de_publicacion() + "\n");
+        LoggerFile.getInstance().Log("Se guardó un libro con los siguientes valores: \n" + libro);
+
     }
 
     public static Integer leerEntero(final JTextField vista) {
@@ -80,6 +83,7 @@ public class IOController {
         final boolean condicionLibro = noEsLibroDuplicado(libro);
         if (condicionLibro) {
             vectorLibros.add(libro);
+            LoggerFile.getInstance().Log("Se agregó un libro con los siguientes valores: \n" + libro);
         }
         return condicionLibro;
     }
@@ -95,7 +99,11 @@ public class IOController {
     }
 
     public boolean deleteBook(Libro bookToDelete) {
-        return vectorLibros.remove(bookToDelete);
+        boolean wasRemoved = vectorLibros.remove(bookToDelete);
+        if (wasRemoved) {
+            LoggerFile.getInstance().Log("Se elimino un libro con los siguientes valores: \n" + bookToDelete);
+        }
+        return wasRemoved;
     }
 
     public boolean hasRegisters() {
@@ -112,6 +120,7 @@ public class IOController {
         currentBook.setEditorial(bookToModify.getEditorial());
         currentBook.setAnno_de_publicacion(bookToModify.getAnno_de_publicacion());
         currentBook.setTitulo(bookToModify.getTitulo());
+        LoggerFile.getInstance().Log("Se modificó un libro con los siguientes valores: \n" + currentBook);
         return true;
 
     }

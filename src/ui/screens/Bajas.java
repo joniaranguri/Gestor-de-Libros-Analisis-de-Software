@@ -45,12 +45,15 @@ public class Bajas extends BaseScreen implements ActionListener {
     }
 
     private Bajas() {
+        //Se configura la vista
         configureView();
+        //Se setea el estilo de los labels
         setLabelsStyle();
     }
 
     private void setLabelsStyle() {
         //Seteo el font de los labels en bold para poder resaltarlos de los valores
+        //Todos los labels van a ir bold
         final Font f = tituloLabel.getFont();
         tituloLabel.setFont(f.deriveFont(f.getStyle() | Font.BOLD));
         autorLabel.setFont(f.deriveFont(f.getStyle() | Font.BOLD));
@@ -96,6 +99,7 @@ public class Bajas extends BaseScreen implements ActionListener {
         editorialValueLabel.setText("");
         anioDePublicacionValueLabel.setText("");
         isbnValueLabel.setText("");
+        //El texto del boton vuelve a ser Iniciar
         deleteButton.setText("Iniciar");
     }
 
@@ -107,6 +111,7 @@ public class Bajas extends BaseScreen implements ActionListener {
         editorialValueLabel.setText(bookToDelete.getEditorial());
         anioDePublicacionValueLabel.setText(String.valueOf(bookToDelete.getAnno_de_publicacion()));
         isbnValueLabel.setText(bookToDelete.getISBN());
+        //Una vez obtuvimos el libro, ya se puede eliminar
         deleteButton.setText(ELIMINAR);
     }
 
@@ -115,6 +120,7 @@ public class Bajas extends BaseScreen implements ActionListener {
         int dialogButton = JOptionPane.YES_NO_OPTION;
         int dialogResult = JOptionPane.showConfirmDialog(this, "Estas seguro que queres borrar a " + bookToDelete.getTitulo() + "?", "Confirmar borrado", dialogButton);
         if (dialogResult == 0) {
+            //Si se elimino correctamente la funcion devuelve true
             final boolean isbnDeleted = IOController.getInstance().deleteBook(bookToDelete);
             if (isbnDeleted) {
                 showMessage("Se ha eliminado correctamente el libro " + bookToDelete.getTitulo());
@@ -128,12 +134,15 @@ public class Bajas extends BaseScreen implements ActionListener {
 
     @Override
     public String getTitle() {
-        return null;
+        //En este caso no agregamos titulo
+        return "Dar de baja";
     }
 
     @Override
     protected void setLocationAndSize() {
         //Se configuran los anchos,altos, y posiciones de las vistas
+        //Tanto de los labels fijos como de los labels dinamicos
+        //Y tambien del boton de eliminar
         titleView.setBounds(0, 0, TITLE_FULL_WIDTH, 50);
         tituloLabel.setBounds(CENTER_WIDTH, 30, 200, 30);
         autorLabel.setBounds(CENTER_WIDTH, 90, 200, 30);
@@ -153,6 +162,7 @@ public class Bajas extends BaseScreen implements ActionListener {
     @Override
     protected void addComponentsToContainer() {
         //Se agregan las vistas al contenedor de la pantalla
+        //Solamente se agregan ya que las posiciones estan ya configuradas
         add(titleView);
         add(tituloLabel);
         add(tituloValueLabel);
@@ -166,26 +176,31 @@ public class Bajas extends BaseScreen implements ActionListener {
         add(anioDePublicacionValueLabel);
         add(isbnLabel);
         add(isbnValueLabel);
+        //Tambien se agrega el boton
         add(deleteButton);
     }
 
     @Override
     protected void addActionsEvents() {
+        //Se agrega el action listener al boton
         deleteButton.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        //Si se clickeo sobre el boton de eliminar realizamos la accion
         if (e.getSource() == deleteButton) {
             if (deleteButton.getText().equals(INICIAR)) {
                 //Si no hay registros no se puede eliminar nada
                 final boolean hayRegistros = IOController.getInstance().hasRegisters();
                 if (hayRegistros) {
+                    //Necesitamos obtener el Isbn a eliminar
                     getIsbnToDelete();
                 } else {
                     showMessage("No hay registros para eliminar");
                 }
             } else {
+                //Vamos a confirmar la baja
                 confirmDelete();
             }
         }

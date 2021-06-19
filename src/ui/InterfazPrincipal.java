@@ -1,5 +1,6 @@
 package ui;
 
+import BL.LoggerFile;
 import constants.ScreenName;
 import controllers.IOController;
 import controllers.ScreenManager;
@@ -73,6 +74,8 @@ public class InterfazPrincipal extends JFrame {
             //Solamente guardamos si nos dice que si
             IOController.getInstance().saveAll();
             JOptionPane.showMessageDialog(this, "Se han guardado correctamente los registros");
+        }else{
+            LoggerFile.getInstance().Log("El usuario no guardo los registros existentes");
         }
 
     }
